@@ -1,6 +1,7 @@
 import Homepage from "./components/Homepage";
 import NotFound from "./components/NotFound";
 import Shop from "./components/pages/shop/Shop";
+import SingleProduct from "./components/singleproduct/SingleProduct";
 import "./App.scss";
 
 import { Switch, Route } from "react-router-dom";
@@ -11,6 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={Shop} />
+        <Route path="/product/:id" component={SingleProduct} />
         <Route path="*" component={NotFound} />
       </Switch>
     </div>

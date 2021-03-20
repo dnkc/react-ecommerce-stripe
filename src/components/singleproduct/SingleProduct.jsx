@@ -18,8 +18,10 @@ const SingleProduct = ({ match, history }) => {
     }
     // if product exists, set it
     setProduct(product);
-  });
-
+  }, [history, id, products, product]);
+  if (!product) {
+    return null;
+  }
   const { imageUrl, title, price, description } = product;
 
   return (
@@ -31,7 +33,7 @@ const SingleProduct = ({ match, history }) => {
         <div className="product-details">
           <div className="name-price">
             <h3>{title}</h3>
-            <p>{price}</p>
+            <p>$ {price}</p>
           </div>
           <div className="add-to-cart-btns">
             <button
