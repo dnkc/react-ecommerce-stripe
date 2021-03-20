@@ -1,6 +1,6 @@
-import React from "react";
+import ProductsContextProvider from "./ProductsContext";
 
-const sumItems = (cartItems) => {
+export const sumItems = (cartItems) => {
   return {
     itemCount: cartItems.reduce((total, prod) => total + prod.quantity, 0),
     total: cartItems.reduce(
@@ -24,6 +24,17 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         cartItems: [...state.cartItems],
+        ...sumItems(state.cartItems),
+      };
+    case "INCREASE_QUANTITY":
+      const increaseQtyIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      state.cartItems[increaseQtyIndex].quantity++;
+      return {
+        ...state,
+        cartItems: [...state.cartItems],
+        ...sumItems(state.cartItems),
       };
     default:
       return state;
