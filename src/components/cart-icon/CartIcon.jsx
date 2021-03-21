@@ -5,11 +5,12 @@ import { CartContext } from "../../context/CartContext";
 
 const CartIcon = () => {
   const { itemCount, cartItems } = useContext(CartContext);
+
   console.log("cartItems:", cartItems);
   return (
     <div className="cart-container">
       <img src={shoppingBag} alt="shopping cart icon" />
-      {itemCount > 0 ? <span className="cart-count"> {itemCount}</span> : null}
+      {itemCount >= 0 ? <span className="cart-count"> {itemCount}</span> : null}
     </div>
   );
 };

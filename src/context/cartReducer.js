@@ -1,5 +1,3 @@
-import ProductsContextProvider from "./ProductsContext";
-
 export const sumItems = (cartItems) => {
   return {
     itemCount: cartItems.reduce((total, prod) => total + prod.quantity, 0),
@@ -35,6 +33,34 @@ const cartReducer = (state, action) => {
         ...state,
         cartItems: [...state.cartItems],
         ...sumItems(state.cartItems),
+      };
+    case "DECREASE_QUANTITY":
+      const decreaseQtyIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      const product = state.cartItems[decreaseQtyIndex];
+      if (product.quantity > 1) {
+        product.quantity--;
+      }
+      return {
+        ...state,
+        cartItems: [...state.cartItems],
+        ...sumItems(state.cartItems),
+      };
+    case "REMOVE_PRODUCT":
+      const newCartItems = state.cartItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+      return {
+        ...state,
+        cartItems: [...newCartItems],
+        ...sumItems(newCartItems),
+      };
+    case "CLEAR_CART":
+      return {
+        cartItems: [],
+        itemCount: 0,
+        total: 0,
       };
     default:
       return state;

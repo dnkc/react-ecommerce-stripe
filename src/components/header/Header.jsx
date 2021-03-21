@@ -19,7 +19,10 @@ const Header = () => {
           <Link to="/shop">Shop</Link>
         </li>
       </ul>
-      <CartIcon />
+      <Link to="/cart">
+        {" "}
+        <CartIcon />
+      </Link>
     </nav>
   );
 };
