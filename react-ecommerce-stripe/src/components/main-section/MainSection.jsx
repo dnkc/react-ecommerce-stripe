@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import "./mainsection.styles.scss";
 
 import studioBag from "../../assets/studio-bag.png";
@@ -33,4 +34,4 @@ const MainSection = ({ history }) => {
   );
 };
 
-export default MainSection;
+export default withRouter(MainSection);

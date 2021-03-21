@@ -13,8 +13,13 @@ const CartPage = () => {
     increaseQuantity,
     decreaseQuantity,
     removeProduct,
+    clearCart,
   } = useContext(CartContext);
-  const funcs = { increaseQuantity, decreaseQuantity, removeProduct };
+  const funcs = {
+    increaseQuantity,
+    decreaseQuantity,
+    removeProduct,
+  };
   return (
     <Layout>
       <>
@@ -29,7 +34,11 @@ const CartPage = () => {
                   <CartItem {...item} key={item.id} {...funcs} />
                 ))}
               </div>
-              <Total itemCount={itemCount} total={total} />
+              <Total
+                itemCount={itemCount}
+                total={total}
+                clearCart={clearCart}
+              />
             </div>
           </>
         )}
