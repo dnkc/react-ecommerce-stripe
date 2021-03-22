@@ -1,5 +1,19 @@
 const stripeAPI = require("../stripe");
 
+const webHookHandlers = {
+  "checkout.session.completed": (data) => {
+    console.log("Checkout completed successfully", data);
+    // can do other business logic here
+    // send emails, add info to database, etc
+  },
+  "payment_intent.succeeded": (data) => {
+    console.log("Payment intent completed successfuly", data);
+  },
+  "payment_intent.payment_failed": (data) => {
+    console.log("Payment intent failed", data);
+  },
+};
+
 function webhook(req, res) {
   const sig = req.headers["stripe-signature"];
 
@@ -14,9 +28,8 @@ function webhook(req, res) {
   } catch (error) {
     return res.status(400).send(`Webhook error ${error.message}`);
   }
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object;
-    console.log("Event data", session);
+  if (webHookHandlers[event.type]) {
+    webHookHandlers[event.type](event.data.object);
   }
 }
 

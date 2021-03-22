@@ -16,7 +16,7 @@ const validate = (values) => {
   return errors;
 };
 
-const ShippingAddress = () => {
+const ShippingAddress = ({ setShipping }) => {
   const initialValues = {
     email: "",
     name: "",
@@ -26,14 +26,16 @@ const ShippingAddress = () => {
     <div>
       <h4>Shipping Address</h4>
       <Formik
-        intialValues={initialValues}
+        initialValues={initialValues}
         validate={validate}
         onSubmit={(values) => {
           console.log("values", values);
+          setShipping(values);
         }}
       >
         {({ values, errors, handleChange, handleSubmit }) => {
           const { name, email, address } = errors;
+
           return (
             <form onSubmit={handleSubmit}>
               <div>
@@ -41,6 +43,7 @@ const ShippingAddress = () => {
                   type="text"
                   name="name"
                   onChange={handleChange}
+                  placeholder="Name"
                   value={values.name}
                   className={"nomad-input " + (name ? "error" : "")}
                 />
@@ -49,6 +52,7 @@ const ShippingAddress = () => {
                 <input
                   type="email"
                   name="email"
+                  placeholder="Email"
                   onChange={handleChange}
                   value={values.email}
                   className={"nomad-input " + (email ? "error" : "")}
@@ -58,6 +62,7 @@ const ShippingAddress = () => {
                 <input
                   type="text"
                   name="address"
+                  placeholder="Address"
                   onChange={handleChange}
                   value={values.address}
                   className={"nomad-input " + (address ? "error" : "")}
