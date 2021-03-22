@@ -6,6 +6,10 @@ require("dotenv").config({ path: "./.env" });
 const createCheckoutSession = require("./api/checkout");
 const webhook = require("./api/webhook");
 const paymentIntent = require("./api/paymentIntent");
+
+const decodeJWT = require("./auth/decodeJWT");
+const validateUser = require("./auth/validateUser");
+
 const app = express();
 
 const PORT = process.env.PORT || 8000;
@@ -16,6 +20,7 @@ app.use(
   })
 );
 app.use(cors({ origin: true }));
+app.use(decodeJWT);
 
 app.get("/", (req, res) => res.send("Hello World!"));
 

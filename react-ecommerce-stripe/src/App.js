@@ -6,6 +6,8 @@ import CartPage from "./components/pages/cartPage/CartPage";
 import Checkout from "./components/checkout/Checkout";
 import Success from "./components/checkout/stripeCheckout/Success";
 import Cancelled from "./components/checkout/stripeCheckout/Cancelled";
+import SignUp from "./components/sign-up/SignUp";
+import SignIn from "./components/sign-in/SignIn";
 import "./App.scss";
 
 import { Switch, Route } from "react-router-dom";
@@ -21,6 +23,8 @@ function App() {
         <Route path="/checkout" component={Checkout} />
         <Route path="/success" component={Success} />
         <Route path="/cancelled" component={Cancelled} />
+        <Route path="/sign-up" component={SignUp} />
+        <Route path="/sign-in" component={SignIn} />
         <Route path="*" component={NotFound} />
       </Switch>
     </div>
