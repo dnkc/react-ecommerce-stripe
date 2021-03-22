@@ -5,6 +5,7 @@ function validateUser(req, res, next) {
   if (!user) {
     return res.status(401).send();
   }
+  next();
 }
 
 module.exports = validateUser;

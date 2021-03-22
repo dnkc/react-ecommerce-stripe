@@ -7,12 +7,12 @@ async function decodeJWT(req, res, next) {
     req.headers.authorization.startsWith("Bearer ")
   ) {
     const idToken = req.headers.authorization.split("Bearer ")[1];
-  }
-  try {
-    const decodedToken = await firebase.auth.verifyIdToken(idToken);
-    req["currentUser"] = decodedToken;
-  } catch (error) {
-    console.log(error);
+    try {
+      const decodedToken = await firebase.auth.verifyIdToken(idToken);
+      req["currentUser"] = decodedToken;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   next();
