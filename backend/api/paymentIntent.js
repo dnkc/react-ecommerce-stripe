@@ -25,6 +25,7 @@ async function paymentIntent(req, res) {
 
     res.status(200).json({
       clientSecret: paymentIntent.client_secret,
+      id: paymentIntent.id,
     });
   } catch (error) {
     console.log(error);
